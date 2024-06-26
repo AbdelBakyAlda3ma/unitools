@@ -21,7 +21,7 @@ class UniTools extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        initialRoute: HomePage.routeName,
+        initialRoute: SignInScreen.routeName,
         debugShowCheckedModeBanner: false,
         routes: {
           AuthVerificationScreen.routeName: (context) =>
