@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:svg_flutter/svg.dart';
+import 'package:flutter_svg/svg.dart';
 
 class CustomSearchTextField extends StatelessWidget {
   const CustomSearchTextField({super.key});

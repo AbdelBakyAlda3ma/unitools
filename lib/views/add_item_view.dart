@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:svg_flutter/svg.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:unitools/core/constant.dart';
 import 'package:unitools/views/home_page_view.dart';
 import 'package:unitools/views/my_favourite_view.dart';
@@ -19,14 +19,14 @@ class _AddItemViewState extends State<AddItemView> {
     return Scaffold(
       bottomNavigationBar: NavigationBar(
         onDestinationSelected: (value) {
-         if (value == 0) {
+          if (value == 0) {
           } else if (value == 1) {
           } else if (value == 2) {
             Navigator.pushNamed(context, AddItemView.routeName);
           } else if (value == 3) {
             Navigator.pushNamed(context, MyFavouriteView.routeName)
                 .whenComplete(() => setState(() {}));
-          }  else if (value == 4) {
+          } else if (value == 4) {
             Navigator.pushNamed(context, HomePage.routeName);
           }
         },

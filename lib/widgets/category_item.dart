@@ -1,16 +1,17 @@
 // ignore_for_file: use_full_hex_values_for_flutter_colors
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:unitools/core/constant.dart';
-import 'package:unitools/models/item_model.dart';
+import 'package:unitools/models/tool_model.dart';
 
 class CategoryItem extends StatefulWidget {
   const CategoryItem({
     super.key,
-    required this.itemModel,
+    required this.toolModel,
   });
 
-  final ItemModel itemModel;
+  final ToolModel toolModel;
 
   @override
   State<CategoryItem> createState() => _CategoryItemState();
@@ -31,25 +32,30 @@ class _CategoryItemState extends State<CategoryItem> {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              width: double.infinity,
-              height: 86,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(widget.itemModel.image),
-                  fit: BoxFit.fill,
+            Expanded(
+              child: Container(
+                width: double.infinity,
+                height: 86,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: CachedNetworkImageProvider(
+                      widget.toolModel.photos?[0] ?? '',
+                    ),
+                    fit: BoxFit.fill,
+                  ),
                 ),
               ),
             ),
             Text(
-              widget.itemModel.title,
+              widget.toolModel.name ?? '',
               style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 18,
+                overflow: TextOverflow.ellipsis,
               ),
             ),
             Text(
-              widget.itemModel.subTitle,
+              widget.toolModel.description ?? '',
               style: const TextStyle(
                 fontSize: 14,
               ),
@@ -62,7 +68,7 @@ class _CategoryItemState extends State<CategoryItem> {
                   Row(
                     children: [
                       Container(
-                        width: 75,
+                        width: 70,
                         height: 25,
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
@@ -70,7 +76,7 @@ class _CategoryItemState extends State<CategoryItem> {
                           color: const Color.fromARGB(207, 242, 240, 240),
                         ),
                         child: Text(
-                          widget.itemModel.university,
+                          widget.toolModel.university ?? '',
                           style: const TextStyle(
                             fontSize: 14,
                           ),
@@ -88,7 +94,7 @@ class _CategoryItemState extends State<CategoryItem> {
                           color: const Color.fromARGB(207, 242, 240, 240),
                         ),
                         child: Text(
-                          widget.itemModel.type,
+                          '${widget.toolModel.price} EGP',
                           style: const TextStyle(
                             fontSize: 14,
                           ),
@@ -99,7 +105,7 @@ class _CategoryItemState extends State<CategoryItem> {
                   const SizedBox(
                     height: 4,
                   ),
-                  widget.itemModel.faculty != null
+                  widget.toolModel.college != null
                       ? Container(
                           width: 142,
                           height: 31,
@@ -109,7 +115,7 @@ class _CategoryItemState extends State<CategoryItem> {
                             color: const Color.fromARGB(207, 242, 240, 240),
                           ),
                           child: Text(
-                            widget.itemModel.faculty ?? "",
+                            widget.toolModel.college ?? "",
                             style: const TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.bold,
@@ -129,19 +135,19 @@ class _CategoryItemState extends State<CategoryItem> {
             // Step 2
             onTap: () {
               setState(() {
-                if (!favouriteItem.contains(widget.itemModel)) {
-                  favouriteItem.add(widget.itemModel);
+                if (!favouriteTools.contains(widget.toolModel)) {
+                  favouriteTools.add(widget.toolModel);
                 } else {
-                  favouriteItem.remove(widget.itemModel);
+                  favouriteTools.remove(widget.toolModel);
                 }
               });
             },
             child: Icon(
-              favouriteItem.contains(widget.itemModel)
+              favouriteTools.contains(widget.toolModel)
                   ? Icons.favorite
                   : Icons.favorite_outline, // Step 4
               size: 25,
-              color: favouriteItem.contains(widget.itemModel)
+              color: favouriteTools.contains(widget.toolModel)
                   ? Colors.red
                   : null, // Example: Change color when favorited
             ),

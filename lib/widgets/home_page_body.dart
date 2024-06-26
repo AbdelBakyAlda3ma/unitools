@@ -1,7 +1,7 @@
 // ignore_for_file: use_full_hex_values_for_flutter_colors
 
 import 'package:flutter/material.dart';
-import 'package:svg_flutter/svg.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:unitools/core/constant.dart';
 import 'package:unitools/core/items.dart';
 import 'package:unitools/models/item_navigaion_model.dart';
@@ -27,6 +27,14 @@ class _HomePageBodyState extends State<HomePageBody> {
   bool isClickedProgram = false;
   bool isClickedSection = false;
   bool isClickedLectures = false;
+  int currentIndex = 0;
+  List<String> horizontalBarList = [
+    "Home",
+    "Tools",
+    "Programs",
+    "Sections",
+    "Lectures",
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -70,141 +78,29 @@ class _HomePageBodyState extends State<HomePageBody> {
               const CustomAppBar(),
               const SearchSection(linearGradient: linearGradient),
               const SizedBox(
-                height: 18,
+                height: 10,
               ),
-              Row(
-                children: [
-                  GestureDetector(
+              SizedBox(
+                height: 40,
+                child: ListView.separated(
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) => HorizontalBarItem(
+                    isClicked: currentIndex == index,
+                    linearGradient: linearGradient,
+                    text: horizontalBarList[index],
                     onTap: () {
-                      clickTap(1);
+                      setState(() {
+                        currentIndex = index;
+                      });
+                      clickTap(index + 1);
                     },
-                    child: Container(
-                      alignment: Alignment.center,
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        color: !isClickedHome
-                            ? const Color.fromARGB(207, 242, 240, 240)
-                            : null,
-                        gradient: isClickedHome ? linearGradient : null,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      width: 60,
-                      height: 40,
-                      child: Text(
-                        "Home",
-                        style: TextStyle(
-                            color: isClickedHome
-                                ? Colors.white
-                                : const Color(0xff858585)),
-                      ),
-                    ),
                   ),
-                  const Spacer(),
-                  GestureDetector(
-                    onTap: () {
-                      clickTap(2);
-                    },
-                    child: Container(
-                      alignment: Alignment.center,
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        color: !isClickedTools
-                            ? const Color.fromARGB(207, 242, 240, 240)
-                            : null,
-                        borderRadius: BorderRadius.circular(10),
-                        gradient: isClickedTools ? linearGradient : null,
-                      ),
-                      width: 60,
-                      height: 40,
-                      child: Text(
-                        "Tools",
-                        style: TextStyle(
-                            color: isClickedTools
-                                ? Colors.white
-                                : const Color(0xff858585)),
-                      ),
-                    ),
+                  separatorBuilder: (BuildContext context, int index) =>
+                      const SizedBox(
+                    width: 10,
                   ),
-                  const Spacer(),
-                  GestureDetector(
-                    onTap: () {
-                      clickTap(3);
-                    },
-                    child: Container(
-                      alignment: Alignment.center,
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        color: !isClickedProgram
-                            ? const Color.fromARGB(207, 242, 240, 240)
-                            : null,
-                        gradient: isClickedProgram ? linearGradient : null,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      width: 80,
-                      height: 40,
-                      child: Text(
-                        "Programs",
-                        style: TextStyle(
-                            color: isClickedProgram
-                                ? Colors.white
-                                : const Color(0xff858585)),
-                      ),
-                    ),
-                  ),
-                  const Spacer(),
-                  GestureDetector(
-                    onTap: () {
-                      clickTap(4);
-                    },
-                    child: Container(
-                      alignment: Alignment.center,
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        color: !isClickedSection
-                            ? const Color.fromARGB(207, 242, 240, 240)
-                            : null,
-                        borderRadius: BorderRadius.circular(10),
-                        gradient: isClickedSection ? linearGradient : null,
-                      ),
-                      width: 74,
-                      height: 40,
-                      child: Text(
-                        "Sections",
-                        style: TextStyle(
-                            color: isClickedSection
-                                ? Colors.white
-                                : const Color(0xff858585)),
-                      ),
-                    ),
-                  ),
-                  const Spacer(),
-                  GestureDetector(
-                    onTap: () {
-                      clickTap(5);
-                    },
-                    child: Container(
-                      alignment: Alignment.center,
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        color: !isClickedLectures
-                            ? const Color.fromARGB(207, 242, 240, 240)
-                            : null,
-                        borderRadius: BorderRadius.circular(10),
-                        gradient: isClickedLectures ? linearGradient : null,
-                      ),
-                      width: 80,
-                      height: 40,
-                      child: Text(
-                        "Lectures",
-                        style: TextStyle(
-                            color: isClickedLectures
-                                ? Colors.white
-                                : const Color(0xff858585)),
-                      ),
-                    ),
-                  ),
-                  const Spacer(),
-                ],
+                  itemCount: 5,
+                ),
               ),
               const SizedBox(
                 height: 27,
@@ -306,6 +202,46 @@ class _HomePageBodyState extends State<HomePageBody> {
         break;
       default:
     }
+  }
+}
+
+class HorizontalBarItem extends StatelessWidget {
+  const HorizontalBarItem({
+    super.key,
+    required this.isClicked,
+    required this.linearGradient,
+    this.onTap,
+    required this.text,
+  });
+
+  final bool isClicked;
+  final LinearGradient linearGradient;
+  final void Function()? onTap;
+  final String text;
+  @override
+  Widget build(BuildContext context) {
+    return IntrinsicHeight(
+      child: GestureDetector(
+        onTap: onTap,
+        child: Container(
+          alignment: Alignment.center,
+          padding: const EdgeInsets.all(10),
+          decoration: BoxDecoration(
+            color: !isClicked ? const Color.fromARGB(207, 242, 240, 240) : null,
+            borderRadius: BorderRadius.circular(10),
+            gradient: isClicked ? linearGradient : null,
+          ),
+          width: 80,
+          height: 40,
+          child: Text(
+            text,
+            style: TextStyle(
+              color: isClicked ? Colors.white : const Color(0xff858585),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
 

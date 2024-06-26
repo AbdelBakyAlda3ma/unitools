@@ -19,7 +19,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.3.0 <4.0.0'
+  sdk: '>=3.0.0 <4.0.0'
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -28,18 +28,23 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  cached_network_image: ^3.3.1
   country_picker: ^2.0.25
-  cupertino_icons: ^1.0.6
+  dio: ^5.4.3+1
   flutter:
     sdk: flutter
+  flutter_bloc: ^8.1.3
+  fluttertoast: ^8.2.4
   font_awesome_flutter: ^10.7.0
-  image_picker: ^1.1.0
+  image_picker: ^1.1.2
   persistent_bottom_nav_bar: ^5.0.2
+  pinput: ^4.0.0
   provider: ^6.1.2
-  svg_flutter: ^0.0.1
+  shared_preferences: ^2.2.2
+  flutter_svg: ^1.1.0
 
 dev_dependencies:
-  flutter_lints: ^3.0.0
+  flutter_lints: ^4.0.0
   flutter_test:
     sdk: flutter
 
@@ -69,6 +74,11 @@ flutter:
     - family: Raleway
       fonts:
         - asset: assets/fonts/Raleway-VariableFont_wght.ttf
+    - family: SF-Pro-Text
+      fonts:
+        - asset: assets/fonts/SF-Pro-Text-Bold.ttf
+        - asset: assets/fonts/SF-Pro-Text-Regular.ttf
+        - asset: assets/fonts/SF-Pro-Text-Semibold.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

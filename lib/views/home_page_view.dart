@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
-import 'package:svg_flutter/svg.dart';
+import 'package:unitools/controllers/tools_without_authorized_cubit/tools_without_authorized_cubit.dart';
 import 'package:unitools/core/constant.dart';
 import 'package:unitools/widgets/home_page_body.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
-  static String routeName = '/';
+  static String routeName = '/HomePage';
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -23,11 +25,14 @@ class _HomePageState extends State<HomePage> {
         inactiveColorPrimary: Colors.black,
       );
     }).toList();
-    return const Scaffold(
-      body: Center(
-        child: HomePageBody(),
+    return BlocProvider<ToolsWithoutAuthorizedCubit>(
+      create: (context) =>
+          ToolsWithoutAuthorizedCubit()..getAllToolsWithoutAuthorized(),
+      child: const Scaffold(
+        body: Center(
+          child: HomePageBody(),
+        ),
       ),
-      
     );
   }
 }

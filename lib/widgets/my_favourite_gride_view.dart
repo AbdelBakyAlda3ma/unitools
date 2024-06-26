@@ -12,7 +12,7 @@ class MyFavouriteGridView extends StatelessWidget {
     return GridView.builder(
       padding: EdgeInsets.zero,
       shrinkWrap: true,
-      itemCount: favouriteItem.length,
+      itemCount: favouriteTools.length,
       physics: const BouncingScrollPhysics(),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
@@ -22,7 +22,7 @@ class MyFavouriteGridView extends StatelessWidget {
       ),
       itemBuilder: (context, index) {
         return CategoryItem(
-          itemModel: favouriteItem[index],
+          toolModel: favouriteTools[index],
         );
       },
     );

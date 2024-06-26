@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:svg_flutter/svg.dart';
+import 'package:flutter_svg/svg.dart';
 
 class CustomAppBar extends StatefulWidget {
   const CustomAppBar({super.key});
@@ -61,32 +61,14 @@ class _CustomAppBarState extends State<CustomAppBar> {
                     onChanged: (String? value) {
                       selectedCity = value!;
                       if (value == "medicine") {
-                        
-                      } 
-                      else if (value == "Engineering"){
-
-                      } 
-                      else if (value == "Science"){
-
-                      } 
-                      else if (value == "Education"){
-
-                      } 
-                      else if (value == "Commerce"){
-
-                      } 
-                      else if (value == "Literature"){
-
-                      } 
-                      else if (value == "Dentistry"){
-
-                      } 
-                      else if (value == "Pharmacy"){
-
-                      } 
-                      else if (value == "Nursing"){
-
-                      } 
+                      } else if (value == "Engineering") {
+                      } else if (value == "Science") {
+                      } else if (value == "Education") {
+                      } else if (value == "Commerce") {
+                      } else if (value == "Literature") {
+                      } else if (value == "Dentistry") {
+                      } else if (value == "Pharmacy") {
+                      } else if (value == "Nursing") {}
                       setState(() {});
                     })
               ],

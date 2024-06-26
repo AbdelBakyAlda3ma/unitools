@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:svg_flutter/svg.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:unitools/widgets/custom_search_text_field.dart';
 
 class SearchSection extends StatelessWidget {
